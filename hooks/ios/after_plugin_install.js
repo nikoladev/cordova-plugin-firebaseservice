@@ -19,7 +19,7 @@ module.exports = function(context) {
 	    var projectName = et.XML(contents).findtext('name');
 
 	    // Overwrite the mock GoogleService-Info.plist
-		var dst = path.join(context.opts.projectRoot, 'platforms', 'ios', projectName, 'GoogleService-Info.plist');
+		var dst = path.join(context.opts.projectRoot, 'platforms', 'ios', 'GoogleService-Info.plist');
 		fs.writeFileSync(dst, data);
 		fs.unlinkSync(src);
 	}
