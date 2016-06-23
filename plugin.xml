@@ -72,7 +72,7 @@
 		<!-- RemoteConfig -->
 		<source-file src="src/android/RemoteConfig.java" target-dir="src/com/rener/firebase" />
 	</platform>
-    
+
     <!-- ios -->
     <platform name="ios">
         <hook type="after_plugin_install" src="hooks/ios/after_plugin_install.js" />
@@ -88,28 +88,34 @@
                 <param name="ios-package" value="CDVFBConfig" />
             </feature>
         </config-file>
-        
+
+        <config-file target="*-Info.plist" parent="UIBackgroundModes">
+            <array>
+                <string>remote-notification</string>
+            </array>
+        </config-file>
+
         <!-- frameworks -->
         <framework src="src/ios/FirebaseInstanceID.framework" custom="true" />
         <framework src="src/ios/GoogleInterchangeUtilities.framework" custom="true" />
         <framework src="src/ios/GoogleIPhoneUtilities.framework" custom="true" />
         <framework src="src/ios/GoogleSymbolUtilities.framework" custom="true" />
         <framework src="src/ios/GoogleUtilities.framework" custom="true" />
-        
+
         <resource-file src="src/ios/GoogleService-Info.plist" target-dir="./" />
-        
+
         <!--Analytics-->
         <framework src="src/ios/FirebaseAnalytics.framework" custom="true" />
         <header-file src="src/ios/CDVFBAnalytics.h" />
         <source-file src="src/ios/CDVFBAnalytics.m" />
-        
+
         <!--Notification-->
         <framework src="src/ios/FirebaseMessaging.framework" custom="true" />
         <header-file src="src/ios/CDVFBNotification.h" />
         <source-file src="src/ios/CDVFBNotification.m" />
         <header-file src="src/ios/FBAppDelegate.h" />
         <source-file src="src/ios/FBAppDelegate.m" />
-        
+
         <!--RemoteConfig-->
         <framework src="src/ios/FirebaseRemoteConfig.framework" custom="true" />
         <header-file src="src/ios/CDVFBConfig.h" />
