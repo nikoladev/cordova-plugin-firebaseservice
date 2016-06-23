@@ -89,12 +89,6 @@
             </feature>
         </config-file>
 
-        <config-file target="*-Info.plist" parent="UIBackgroundModes">
-            <array>
-                <string>remote-notification</string>
-            </array>
-        </config-file>
-
         <!-- frameworks -->
         <framework src="src/ios/FirebaseInstanceID.framework" custom="true" />
         <framework src="src/ios/GoogleInterchangeUtilities.framework" custom="true" />
@@ -120,6 +114,12 @@
         <framework src="src/ios/FirebaseRemoteConfig.framework" custom="true" />
         <header-file src="src/ios/CDVFBConfig.h" />
         <source-file src="src/ios/CDVFBConfig.m" />
+
+        <config-file target="*-Info.plist" parent="UIBackgroundModes">
+            <array>
+                <string>remote-notification</string>
+            </array>
+        </config-file>
     </platform>
 
 </plugin>
