@@ -89,8 +89,6 @@
             </feature>
         </config-file>
 
-        <resource-file src="../../www/GoogleService-Info.plist" target-dir="./" />
-
         <!-- frameworks -->
         <framework src="src/ios/FirebaseInstanceID.framework" custom="true" />
         <framework src="src/ios/GoogleInterchangeUtilities.framework" custom="true" />
