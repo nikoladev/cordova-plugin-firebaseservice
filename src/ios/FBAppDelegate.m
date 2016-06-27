@@ -16,7 +16,7 @@
 + (void)load
 {
     Method original, swizzled;
-    
+
     original = class_getInstanceMethod(self, @selector(init));
     swizzled = class_getInstanceMethod(self, @selector(swizzled_init));
     method_exchangeImplementations(original, swizzled);
@@ -26,7 +26,7 @@
 {
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(createNotificationChecker:)
                                                  name:@"UIApplicationDidFinishLaunchingNotification" object:nil];
-    
+
     // This actually calls the original init method over in AppDelegate. Equivilent to calling super
     // on an overrided method, this is not recursive, although it appears that way. neat huh?
     return [self swizzled_init];
@@ -36,6 +36,9 @@
 // to process notifications in cold-start situations
 - (void)createNotificationChecker:(NSNotification *)notification
 {
+    // [START configure_firebase]
+    [FIRApp configure];
+    // [END configure_firebase]
     if (notification)
     {
         NSDictionary *launchOptions = [notification userInfo];
@@ -53,10 +56,10 @@ fetchCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler {
     // If you are receiving a notification message while your app is in the background,
     // this callback will not be fired till the user taps on the notification launching the application.
     // TODO: Handle data of notification
-    
+
     // Print message ID.
     NSLog(@"Message ID: %@", userInfo[@"gcm.message_id"]);
-    
+
     // Pring full message.
     NSLog(@"%@", userInfo);
 }
@@ -69,10 +72,10 @@ fetchCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler {
     // should be done.
     NSString *refreshedToken = [[FIRInstanceID instanceID] token];
     NSLog(@"InstanceID token: %@", refreshedToken);
-    
+
     // Connect to FCM since connection may have failed when attempted before having a token.
     [self connectToFcm];
-    
+
     // TODO: If necessary send token to appliation server.
 }
 // [END refresh_token]
@@ -90,7 +93,7 @@ fetchCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler {
 // [END connect_to_fcm]
 
 - (void)applicationDidBecomeActive:(UIApplication *)application {
-    
+
     // Register for remote notifications
     if (floor(NSFoundationVersionNumber) <= NSFoundationVersionNumber_iOS_7_1) {
         // iOS 7.1 or earlier
@@ -107,11 +110,7 @@ fetchCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler {
         [[UIApplication sharedApplication] registerUserNotificationSettings:settings];
         [[UIApplication sharedApplication] registerForRemoteNotifications];
     }
-    
-    // [START configure_firebase]
-    [FIRApp configure];
-    // [END configure_firebase]
-    
+
     // Add observer for InstanceID token refresh callback.
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(tokenRefreshNotification:)
                                                  name:kFIRInstanceIDTokenRefreshNotification object:nil];
