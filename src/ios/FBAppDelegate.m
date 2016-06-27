@@ -36,9 +36,6 @@
 // to process notifications in cold-start situations
 - (void)createNotificationChecker:(NSNotification *)notification
 {
-    // [START configure_firebase]
-    [FIRApp configure];
-    // [END configure_firebase]
     if (notification)
     {
         NSDictionary *launchOptions = [notification userInfo];
@@ -110,6 +107,10 @@ fetchCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler {
         [[UIApplication sharedApplication] registerUserNotificationSettings:settings];
         [[UIApplication sharedApplication] registerForRemoteNotifications];
     }
+
+    // // [START configure_firebase]
+    // [FIRApp configure];
+    // // [END configure_firebase]
 
     // Add observer for InstanceID token refresh callback.
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(tokenRefreshNotification:)
