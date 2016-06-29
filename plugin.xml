@@ -89,14 +89,14 @@
             </feature>
         </config-file>
 
+        <resource-file src="../../www/GoogleService-Info.plist" target-dir="./" />
+
         <!-- frameworks -->
         <framework src="src/ios/FirebaseInstanceID.framework" custom="true" />
         <framework src="src/ios/GoogleInterchangeUtilities.framework" custom="true" />
         <framework src="src/ios/GoogleIPhoneUtilities.framework" custom="true" />
         <framework src="src/ios/GoogleSymbolUtilities.framework" custom="true" />
         <framework src="src/ios/GoogleUtilities.framework" custom="true" />
-
-        <resource-file src="src/ios/GoogleService-Info.plist" target-dir="./" />
 
         <!--Analytics-->
         <framework src="src/ios/FirebaseAnalytics.framework" custom="true" />
